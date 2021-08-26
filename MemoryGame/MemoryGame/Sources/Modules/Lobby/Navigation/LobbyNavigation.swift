@@ -16,17 +16,32 @@ final class LobbyNavigation: LobbyNavigating {
     
     private weak var navigationController: UINavigationController!
     
+    private let gameplayAssembler: GameplayAssembling
+    
+    init(
+        gameplayAssembler: GameplayAssembling
+    ) {
+        self.gameplayAssembler = gameplayAssembler
+    }
+    
     func use(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
     func presentGameplay(with gameType: GameType) {
-
+        let gameplayViewController = gameplayAssembler.assemble(
+            with: gameType,
+            navigationController: navigationController
+        )
+        
+        navigationController.pushViewController(gameplayViewController, animated: true)
     }
 }
 
 struct LobbyNavigationAssembler {
     func assemble() -> LobbyNavigating {
-        return LobbyNavigation()
+        return LobbyNavigation(
+            gameplayAssembler: GameplayAssembler()
+        )
     }
 }
