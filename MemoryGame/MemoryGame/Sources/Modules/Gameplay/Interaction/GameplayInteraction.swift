@@ -8,12 +8,14 @@
 import Foundation
 
 protocol GameplayInteracting {
+    func use(cardCollectionMediator: CardCollectionMediating)
     func didLoad()
     func didTapBackButton()
 }
 
 final class GameplayInteraction: GameplayInteracting {
     
+    private weak var cardCollectionMediator: CardCollectionMediating!
     private let gameType: GameType
     private let gameBuilder: GameBuilding
     private let navigation: GameplayNavigating
@@ -28,8 +30,13 @@ final class GameplayInteraction: GameplayInteracting {
         self.navigation = navigation
     }
     
+    func use(cardCollectionMediator: CardCollectionMediating) {
+        self.cardCollectionMediator = cardCollectionMediator
+    }
+    
     func didLoad() {
         let game = gameBuilder.build(for: gameType)
+        cardCollectionMediator.updateCards(cards: game.cards)
     }
     
     func didTapBackButton() {

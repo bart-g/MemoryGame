@@ -15,12 +15,17 @@ final class GameplayViewController: UIViewController {
         static let backButtonImageContentMode = UIView.ContentMode.scaleAspectFit
     }
     
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     private let interaction: GameplayInteracting
+    private let collectionMediator: CardCollectionMediating
     
     init(
-        interaction: GameplayInteracting
+        interaction: GameplayInteracting,
+        collectionMediator: CardCollectionMediating
     ) {
         self.interaction = interaction
+        self.collectionMediator = collectionMediator
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,6 +38,8 @@ final class GameplayViewController: UIViewController {
         super.viewDidLoad()
         
         setUp()
+        collectionMediator.use(collectionView: collectionView)
+        interaction.use(cardCollectionMediator: collectionMediator)
         interaction.didLoad()
     }
     
@@ -88,7 +95,8 @@ struct GameplayAssembler: GameplayAssembling {
         )
         
         return GameplayViewController(
-            interaction: interaction
+            interaction: interaction,
+            collectionMediator: CardCollectionMediator()
         )
     }
 }

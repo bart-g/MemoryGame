@@ -27,7 +27,7 @@ final class GameBuilder: GameBuilding {
         var cards = cardsProvider.getCards()
         let numberOfCardsForGame = (gameType.numberOfColumns * gameType.numberOfRows) / 2
         
-        guard cards.count > numberOfCardsForGame else {
+        guard cards.count >= numberOfCardsForGame else {
             return .init(cards: [])
         }
         

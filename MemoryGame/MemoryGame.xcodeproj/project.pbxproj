@@ -24,6 +24,7 @@
 		7A4B6D5F26D7FEB1007408B7 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D5E26D7FEB1007408B7 /* CardType.swift */; };
 		7A4B6D6226D7FECD007408B7 /* GameBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D6126D7FECD007408B7 /* GameBuilder.swift */; };
 		7A4B6D6526D7FEED007408B7 /* CardsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D6426D7FEED007408B7 /* CardsProvider.swift */; };
+		7A4B6D6826D80CD8007408B7 /* CardCollectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D6726D80CD8007408B7 /* CardCollectionMediator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		7A4B6D5E26D7FEB1007408B7 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
 		7A4B6D6126D7FECD007408B7 /* GameBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBuilder.swift; sourceTree = "<group>"; };
 		7A4B6D6426D7FEED007408B7 /* CardsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsProvider.swift; sourceTree = "<group>"; };
+		7A4B6D6726D80CD8007408B7 /* CardCollectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionMediator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 				7A4B6D5D26D7F567007408B7 /* Navigation */,
 				7A4B6D6626D7FEFE007408B7 /* Providers */,
 				7A4B6D5726D7EC2B007408B7 /* View */,
+				7A4B6D6926D80CDB007408B7 /* Mediators */,
 			);
 			path = Gameplay;
 			sourceTree = "<group>";
@@ -273,6 +276,14 @@
 				7A4B6D6426D7FEED007408B7 /* CardsProvider.swift */,
 			);
 			path = Providers;
+			sourceTree = "<group>";
+		};
+		7A4B6D6926D80CDB007408B7 /* Mediators */ = {
+			isa = PBXGroup;
+			children = (
+				7A4B6D6726D80CD8007408B7 /* CardCollectionMediator.swift */,
+			);
+			path = Mediators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +419,7 @@
 			files = (
 				7A4B6D4D26D7E92E007408B7 /* LobbyNavigation.swift in Sources */,
 				7A4B6D4A26D7E8B2007408B7 /* LobbyInteraction.swift in Sources */,
+				7A4B6D6826D80CD8007408B7 /* CardCollectionMediator.swift in Sources */,
 				7A4B6D6526D7FEED007408B7 /* CardsProvider.swift in Sources */,
 				7A4B6D5426D7EC24007408B7 /* GameplayViewController.swift in Sources */,
 				7A4B6D5C26D7F557007408B7 /* GameplayNavigation.swift in Sources */,
