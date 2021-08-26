@@ -15,18 +15,21 @@ protocol GameplayInteracting {
 final class GameplayInteraction: GameplayInteracting {
     
     private let gameType: GameType
+    private let gameBuilder: GameBuilding
     private let navigation: GameplayNavigating
     
     init(
         gameType: GameType,
+        gameBuilder: GameBuilding,
         navigation: GameplayNavigating
     ) {
         self.gameType = gameType
+        self.gameBuilder = gameBuilder
         self.navigation = navigation
     }
     
     func didLoad() {
-        
+        let game = gameBuilder.build(for: gameType)
     }
     
     func didTapBackButton() {
@@ -41,6 +44,7 @@ struct GameplayInteractionAssembler {
     ) -> GameplayInteracting {
         return GameplayInteraction(
             gameType: gameType,
+            gameBuilder: GameBuilder(cardsProvider: CardsProvider(cardType: CardType.self)),
             navigation: navigation
         )
     }

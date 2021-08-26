@@ -33,6 +33,7 @@ final class GameplayViewController: UIViewController {
         super.viewDidLoad()
         
         setUp()
+        interaction.didLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
