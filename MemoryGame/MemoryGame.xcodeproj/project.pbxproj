@@ -14,6 +14,9 @@
 		7A4B6D3326D7DB93007408B7 /* MemoryGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D3226D7DB93007408B7 /* MemoryGameUITests.swift */; };
 		7A4B6D4226D7DC16007408B7 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D4026D7DC16007408B7 /* LobbyViewController.swift */; };
 		7A4B6D4326D7DC16007408B7 /* LobbyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A4B6D4126D7DC16007408B7 /* LobbyViewController.xib */; };
+		7A4B6D4A26D7E8B2007408B7 /* LobbyInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D4926D7E8B2007408B7 /* LobbyInteraction.swift */; };
+		7A4B6D4D26D7E92E007408B7 /* LobbyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D4C26D7E92E007408B7 /* LobbyNavigation.swift */; };
+		7A4B6D5026D7EBC8007408B7 /* GameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D4F26D7EBC8007408B7 /* GameType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		7A4B6D3426D7DB93007408B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A4B6D4026D7DC16007408B7 /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		7A4B6D4126D7DC16007408B7 /* LobbyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LobbyViewController.xib; sourceTree = "<group>"; };
+		7A4B6D4926D7E8B2007408B7 /* LobbyInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyInteraction.swift; sourceTree = "<group>"; };
+		7A4B6D4C26D7E92E007408B7 /* LobbyNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyNavigation.swift; sourceTree = "<group>"; };
+		7A4B6D4F26D7EBC8007408B7 /* GameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +139,10 @@
 		7A4B6D4526D7DC2B007408B7 /* Lobby */ = {
 			isa = PBXGroup;
 			children = (
+				7A4B6D4E26D7E934007408B7 /* Navigation */,
 				7A4B6D4626D7DC32007408B7 /* View */,
+				7A4B6D4B26D7E8BD007408B7 /* Interaction */,
+				7A4B6D5126D7EBCB007408B7 /* Model */,
 			);
 			path = Lobby;
 			sourceTree = "<group>";
@@ -163,6 +172,30 @@
 				7A4B6D1B26D7DB93007408B7 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		7A4B6D4B26D7E8BD007408B7 /* Interaction */ = {
+			isa = PBXGroup;
+			children = (
+				7A4B6D4926D7E8B2007408B7 /* LobbyInteraction.swift */,
+			);
+			path = Interaction;
+			sourceTree = "<group>";
+		};
+		7A4B6D4E26D7E934007408B7 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				7A4B6D4C26D7E92E007408B7 /* LobbyNavigation.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		7A4B6D5126D7EBCB007408B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7A4B6D4F26D7EBC8007408B7 /* GameType.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -295,7 +328,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A4B6D4D26D7E92E007408B7 /* LobbyNavigation.swift in Sources */,
+				7A4B6D4A26D7E8B2007408B7 /* LobbyInteraction.swift in Sources */,
 				7A4B6D4226D7DC16007408B7 /* LobbyViewController.swift in Sources */,
+				7A4B6D5026D7EBC8007408B7 /* GameType.swift in Sources */,
 				7A4B6D1126D7DB92007408B7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
