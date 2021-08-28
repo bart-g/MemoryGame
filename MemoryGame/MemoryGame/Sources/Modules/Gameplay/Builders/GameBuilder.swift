@@ -5,10 +5,6 @@
 //  Created by Bartosz Górka on 26/08/2021.
 //
 
-struct Game {
-    let cards: [[CardType]]
-}
-
 protocol GameBuilding {
     func build(for gameType: GameType) -> Game
 }
@@ -28,9 +24,8 @@ final class GameBuilder: GameBuilding {
         let numberOfCardsForGame = (gameType.numberOfColumns * gameType.numberOfRows) / 2
         
         guard cards.count >= numberOfCardsForGame else {
-            return .init(cards: [])
+            return .init(gameType: gameType, cards: [], uniqueCardCount: 0)
         }
-        
         
         var cardsForGame: [CardType] = []
         
@@ -39,19 +34,8 @@ final class GameBuilder: GameBuilding {
         }
         
         cardsForGame += cardsForGame
+        cardsForGame.shuffle()
         
-        var gameplayCards: [[CardType]] = []
-        
-        (0..<gameType.numberOfRows).forEach { row in
-            var rowCards: [CardType] = []
-            
-            (0..<gameType.numberOfColumns).forEach { column in
-                rowCards.append(cardsForGame.removeFirst())
-            }
-            
-            gameplayCards.append(rowCards)
-        }
-        
-        return .init(cards: gameplayCards.shuffled())
+        return .init(gameType: gameType, cards: cardsForGame, uniqueCardCount: numberOfCardsForGame)
     }
 }

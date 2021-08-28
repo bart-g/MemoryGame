@@ -7,7 +7,15 @@
 
 import UIKit
 
-final class GameplayViewController: UIViewController {
+struct GameplayRenderable {
+    let isConfettiHidden: Bool
+}
+
+protocol GameplayRendering: AnyObject {
+    func render(gameplayRenderable: GameplayRenderable)
+}
+
+final class GameplayViewController: UIViewController, GameplayRendering {
     
     private enum Constants {
         static let backButtonImageInstets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
@@ -15,17 +23,25 @@ final class GameplayViewController: UIViewController {
         static let backButtonImageContentMode = UIView.ContentMode.scaleAspectFit
     }
     
+    @IBOutlet private weak var progressView: UIView!
+    @IBOutlet private weak var progressViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var progressBackgroundView: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private let interaction: GameplayInteracting
     private let collectionMediator: CardCollectionMediating
+    private let progressAnimator: ProgressAnimating
+    
+    private let confettiLayer = ConfettiLayer()
     
     init(
         interaction: GameplayInteracting,
-        collectionMediator: CardCollectionMediating
+        collectionMediator: CardCollectionMediating,
+        progressAnimator: ProgressAnimating
     ) {
         self.interaction = interaction
         self.collectionMediator = collectionMediator
+        self.progressAnimator = progressAnimator
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,8 +54,13 @@ final class GameplayViewController: UIViewController {
         super.viewDidLoad()
         
         setUp()
+        progressAnimator.use(backgroundView: progressBackgroundView)
+        progressAnimator.use(progressWidthConstraint: progressViewWidthConstraint)
         collectionMediator.use(collectionView: collectionView)
+        collectionMediator.use(actionHandler: interaction)
         interaction.use(cardCollectionMediator: collectionMediator)
+        interaction.use(progressAnimator: progressAnimator)
+        interaction.use(gameplayRenderer: self)
         interaction.didLoad()
     }
     
@@ -51,6 +72,7 @@ final class GameplayViewController: UIViewController {
     
     private func setUp() {
         setUpBackButton()
+        setUpConfetti()
     }
     
     private  func setUpBackButton() {
@@ -72,6 +94,19 @@ final class GameplayViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = .init()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.isNavigationBarHidden = false
+    }
+    
+    private func setUpConfetti() {
+        confettiLayer.emitterPosition = CGPoint(x: view.frame.midX, y: 0)
+        confettiLayer.emitterSize = CGSize(width: view.frame.size.width, height: 2)
+        confettiLayer.isHidden = true
+        view.layer.addSublayer(confettiLayer)
+    }
+}
+
+extension GameplayViewController {
+    func render(gameplayRenderable: GameplayRenderable) {
+        confettiLayer.isHidden = gameplayRenderable.isConfettiHidden
     }
 }
  
@@ -96,7 +131,8 @@ struct GameplayAssembler: GameplayAssembling {
         
         return GameplayViewController(
             interaction: interaction,
-            collectionMediator: CardCollectionMediator()
+            collectionMediator: CardCollectionMediatorAssembler().assemble(),
+            progressAnimator: ProgressAnimatorAssembler().assemble()
         )
     }
 }

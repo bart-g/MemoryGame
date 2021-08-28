@@ -10,6 +10,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameplayViewController" customModule="MemoryGame" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="XgA-XX-l4g" id="RI2-Rq-xhO"/>
+                <outlet property="progressBackgroundView" destination="NOH-XL-qJJ" id="e6g-4p-x4d"/>
+                <outlet property="progressView" destination="0iC-ZL-7z3" id="mud-cb-FyT"/>
+                <outlet property="progressViewWidthConstraint" destination="lzB-0L-4ZV" id="RzH-tH-s76"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,16 +31,49 @@
                         <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOH-XL-qJJ">
+                    <rect key="frame" x="20" y="50" width="374" height="18"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0iC-ZL-7z3">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18"/>
+                            <color key="backgroundColor" red="0.44705885649999999" green="0.89411771299999998" blue="0.96470588450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="D7J-EC-fGQ"/>
+                                <constraint firstAttribute="width" id="lzB-0L-4ZV"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="9"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.2470588088" green="0.54901963470000004" blue="0.74509805439999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="0iC-ZL-7z3" secondAttribute="bottom" id="7dL-6S-7Or"/>
+                        <constraint firstItem="0iC-ZL-7z3" firstAttribute="top" secondItem="NOH-XL-qJJ" secondAttribute="top" id="AGM-uX-qXG"/>
+                        <constraint firstItem="0iC-ZL-7z3" firstAttribute="leading" secondItem="NOH-XL-qJJ" secondAttribute="leading" id="GBj-RY-eSJ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="9"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.85098040100000005" green="0.94117647410000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NOH-XL-qJJ" secondAttribute="trailing" constant="20" id="3KK-3o-eea"/>
+                <constraint firstItem="NOH-XL-qJJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="D6m-vM-Jtr"/>
+                <constraint firstItem="XgA-XX-l4g" firstAttribute="top" secondItem="NOH-XL-qJJ" secondAttribute="bottom" constant="16" id="MYE-LA-Q0h"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="XgA-XX-l4g" secondAttribute="bottom" id="UJG-Ge-2gD"/>
                 <constraint firstItem="XgA-XX-l4g" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="aID-XR-tHf"/>
                 <constraint firstItem="XgA-XX-l4g" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aMM-53-08k"/>
+                <constraint firstItem="NOH-XL-qJJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="6" id="p8n-Tq-vYB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XgA-XX-l4g" secondAttribute="trailing" id="tT8-CR-cbJ"/>
             </constraints>
-            <point key="canvasLocation" x="20" y="80"/>
+            <point key="canvasLocation" x="18.840579710144929" y="79.6875"/>
         </view>
     </objects>
 </document>
