@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GameType {
+enum GameType: CaseIterable {
     case threeTimesFour
     case fiveTimesTwo
     case fourTimesFour

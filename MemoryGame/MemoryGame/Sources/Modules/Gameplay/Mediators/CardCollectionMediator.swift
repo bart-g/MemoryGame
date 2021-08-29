@@ -25,10 +25,6 @@ struct CardCollectionElement {
     let action: CardCollectionItemAction
 }
 
-protocol CardCollectionDataSourceProtocol {
-    func updateCards(cards: [[CardType]])
-}
-
 protocol CardCollectionMediating: AnyObject {
     func use(collectionView: UICollectionView)
     func use(actionHandler: CardCollectionActionHandling)
@@ -41,16 +37,27 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
     
     private enum Constants {
         static let cellIdentifier = String(describing: CardCollectionViewCell.self)
+        static let imageSizeMultiplier: CGFloat = 1.4
     }
  
     private weak var actionHandler: CardCollectionActionHandling!
     private weak var collectionView: UICollectionView!
         
+    private let screen: UIScreen
+    private let gameType: GameType.Type
     private var game: Game!
     private var cards: [CardCollectionElement] = []
     private var currentlySelectedCards: [(IndexPath, CardType)] = []
     private var matchedCards: [CardType] = []
     private var isTimerOn = false
+    
+    init(
+        screen: UIScreen,
+        gameType: GameType.Type
+    ) {
+        self.screen = screen
+        self.gameType = gameType
+    }
     
     func use(collectionView: UICollectionView) {
         self.collectionView = collectionView
@@ -65,22 +72,14 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
     
     func update(with game: Game) {
         self.game = game
-        let cards = game.cards
-        
-        self.cards = cards.enumerated().map { index, card in
+        self.cards = game.cards.enumerated().map { index, card in
             .init(
                 item: .card(.init(frontImage: getFrongImage(for: card))),
                 action: .presentCard(card, index)
             )
         }
         
-        let screenWidth = UIScreen.main.bounds.width
-        let itemSize = screenWidth / 5
-        let numberOfRows = CGFloat(game.gameType.numberOfColumns ?? 0)
-        let itemsSize = itemSize * numberOfRows - (numberOfRows - 1) * 10
-        let inset = (screenWidth - itemsSize) / 4
-        
-        collectionView.contentInset = .init(top: 0.0, left: inset, bottom: 0.0, right: inset)
+        setCollectionViewInsets()
         collectionView.reloadData()
     }
     
@@ -118,6 +117,18 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
             return #imageLiteral(resourceName: "Spider")
         }
     }
+    
+    private func getMaxCardColumnsCount() -> Int {
+        gameType.allCases.map({ $0.numberOfColumns }).max() ?? 0
+    }
+    
+    private func setCollectionViewInsets() {
+        let screenWidth = screen.bounds.width
+        let itemSize = screenWidth / CGFloat(getMaxCardColumnsCount())
+        let numberOfRows = CGFloat(game.gameType.numberOfColumns)
+        let inset = (screenWidth - itemSize * numberOfRows) / 2
+        collectionView.contentInset = .init(top: 0.0, left: inset, bottom: 0.0, right: inset)
+    }
 }
 
 extension CardCollectionMediator {
@@ -143,14 +154,18 @@ extension CardCollectionMediator {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let widthMinusSpacing = UIScreen.main.bounds.width - CGFloat((game.gameType.numberOfColumns ?? 0) - 1) * 10.0
-        let size = widthMinusSpacing / 5
-        return .init(width: size, height: size * 1.4)
+        let width = screen.bounds.width
+        let size = width / CGFloat(getMaxCardColumnsCount())
+        
+        return .init(width: size, height: size * Constants.imageSizeMultiplier)
     }
 }
 
 struct CardCollectionMediatorAssembler {
     func assemble() -> CardCollectionMediating {
-        return CardCollectionMediator()
+        return CardCollectionMediator(
+            screen: UIScreen.main,
+            gameType: GameType.self
+        )
     }
 }

@@ -42,8 +42,9 @@ final class ProgressAnimator: ProgressAnimating {
         let backgroundViewWidth = backgroundView.frame.width
         let newProgressWidth = backgroundViewWidth * percentage
                 
+        progressWidthConstraint.constant = newProgressWidth
+
         view.animate(withDuration: Constants.animationDuration) {
-            self.progressWidthConstraint.constant = newProgressWidth
             self.backgroundView.layoutIfNeeded()
         }
     }
