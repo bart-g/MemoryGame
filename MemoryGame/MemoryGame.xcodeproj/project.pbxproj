@@ -13,6 +13,10 @@
 		7A1DECFB26DAB24500A24790 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DECFA26DAB24500A24790 /* Game.swift */; };
 		7A1DECFD26DAB6A000A24790 /* ProgressAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DECFC26DAB6A000A24790 /* ProgressAnimator.swift */; };
 		7A1DED0026DAB6CF00A24790 /* ConfettiLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DECFF26DAB6CF00A24790 /* ConfettiLayer.swift */; };
+		7A1DED0226DBF8BA00A24790 /* GameControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DED0126DBF8BA00A24790 /* GameControllerTests.swift */; };
+		7A1DED0426DBFE2400A24790 /* GameBuildingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DED0326DBFE2400A24790 /* GameBuildingMock.swift */; };
+		7A1DED0626DBFE4E00A24790 /* TimerProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DED0526DBFE4E00A24790 /* TimerProtocolMock.swift */; };
+		7A1DED0826DBFE7100A24790 /* GameControllerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DED0726DBFE7100A24790 /* GameControllerDelegateMock.swift */; };
 		7A4B6D1126D7DB92007408B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D1026D7DB92007408B7 /* AppDelegate.swift */; };
 		7A4B6D1A26D7DB93007408B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4B6D1926D7DB93007408B7 /* Assets.xcassets */; };
 		7A4B6D1D26D7DB93007408B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4B6D1B26D7DB93007408B7 /* LaunchScreen.storyboard */; };
@@ -57,6 +61,10 @@
 		7A1DECFA26DAB24500A24790 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		7A1DECFC26DAB6A000A24790 /* ProgressAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressAnimator.swift; sourceTree = "<group>"; };
 		7A1DECFF26DAB6CF00A24790 /* ConfettiLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiLayer.swift; sourceTree = "<group>"; };
+		7A1DED0126DBF8BA00A24790 /* GameControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControllerTests.swift; sourceTree = "<group>"; };
+		7A1DED0326DBFE2400A24790 /* GameBuildingMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBuildingMock.swift; sourceTree = "<group>"; };
+		7A1DED0526DBFE4E00A24790 /* TimerProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProtocolMock.swift; sourceTree = "<group>"; };
+		7A1DED0726DBFE7100A24790 /* GameControllerDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControllerDelegateMock.swift; sourceTree = "<group>"; };
 		7A4B6D0D26D7DB92007408B7 /* MemoryGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4B6D1026D7DB92007408B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A4B6D1926D7DB93007408B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -142,6 +150,16 @@
 			path = Animators;
 			sourceTree = "<group>";
 		};
+		7A1DED0926DBFE8300A24790 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				7A1DED0326DBFE2400A24790 /* GameBuildingMock.swift */,
+				7A1DED0526DBFE4E00A24790 /* TimerProtocolMock.swift */,
+				7A1DED0726DBFE7100A24790 /* GameControllerDelegateMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		7A4B6D0426D7DB91007408B7 = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +195,8 @@
 			children = (
 				7A4B6D2726D7DB93007408B7 /* MemoryGameTests.swift */,
 				7A4B6D2926D7DB93007408B7 /* Info.plist */,
+				7A1DED0126DBF8BA00A24790 /* GameControllerTests.swift */,
+				7A1DED0926DBFE8300A24790 /* Mocks */,
 			);
 			path = MemoryGameTests;
 			sourceTree = "<group>";
@@ -492,7 +512,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A1DED0826DBFE7100A24790 /* GameControllerDelegateMock.swift in Sources */,
 				7A4B6D2826D7DB93007408B7 /* MemoryGameTests.swift in Sources */,
+				7A1DED0226DBF8BA00A24790 /* GameControllerTests.swift in Sources */,
+				7A1DED0426DBFE2400A24790 /* GameBuildingMock.swift in Sources */,
+				7A1DED0626DBFE4E00A24790 /* TimerProtocolMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

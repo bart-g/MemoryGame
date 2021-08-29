@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CardType: CaseIterable {
+enum CardType: CaseIterable, Equatable {
     case bat
     case cat
     case cow

@@ -35,12 +35,12 @@ final class GameController: GameControlling {
     private var lastSelectedCard: SelectedCard?
     private var matchedCards: [CardType] = []
     private var game: Game!
-    private var timer: Timer.Type
+    private var timer: TimerProtocol.Type
     private var unmatchedCardsTimer: Timer?
 
     init(
         gameBuilder: GameBuilding,
-        timer: Timer.Type
+        timer: TimerProtocol.Type
     ) {
         self.gameBuilder = gameBuilder
         self.timer = timer
@@ -107,3 +107,9 @@ struct GameControllerAssembler {
         )
     }
 }
+
+protocol TimerProtocol {
+    static func scheduledTimer(withTimeInterval interval: TimeInterval, repeats: Bool, block: @escaping (Timer) -> Void) -> Timer
+}
+
+extension Timer: TimerProtocol {}

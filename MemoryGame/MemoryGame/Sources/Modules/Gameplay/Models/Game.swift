@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Game {
+struct Game: Equatable {
     let gameType: GameType
     let cards: [CardType]
     let uniqueCardCount: Int
