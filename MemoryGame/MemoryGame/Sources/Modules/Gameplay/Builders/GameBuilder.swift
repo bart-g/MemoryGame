@@ -39,3 +39,9 @@ final class GameBuilder: GameBuilding {
         return .init(gameType: gameType, cards: cardsForGame, uniqueCardCount: numberOfCardsForGame)
     }
 }
+
+struct GameBuilderAssembler {
+    func assemble() -> GameBuilding {
+        return GameBuilder(cardsProvider: CardsProviderAssembler().assemble())
+    }
+}

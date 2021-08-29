@@ -19,26 +19,30 @@ final class GameplayInteraction: GameplayInteracting {
     
     private enum Constants {
         static let completeProgress: CGFloat = 1.0
+        static let timeFormat = "%02d:%02d"
+        static let timerTimeInverval = 1.0
     }
    
     private weak var progressAnimator: ProgressAnimating!
     private weak var cardCollectionMediator: CardCollectionMediating!
     private weak var gameplayRenderer: GameplayRendering!
     private let gameType: GameType
-    private let gameBuilder: GameBuilding
     private let navigation: GameplayNavigating
     private let gameController: GameControlling
+    private let timer: Timer.Type
+    private var gameTimer: Timer?
+    private var currendSeconds: Int = 0
     
     init(
         gameType: GameType,
-        gameBuilder: GameBuilding,
         navigation: GameplayNavigating,
-        gameController: GameControlling
+        gameController: GameControlling,
+        timer: Timer.Type
     ) {
         self.gameType = gameType
-        self.gameBuilder = gameBuilder
         self.navigation = navigation
         self.gameController = gameController
+        self.timer = timer
         
         gameController.use(delegate: self)
     }
@@ -57,6 +61,7 @@ final class GameplayInteraction: GameplayInteracting {
     
     func didLoad() {
         gameController.startGame(with: gameType)
+        renderTime()
     }
     
     func didTapBackButton() {
@@ -70,12 +75,27 @@ final class GameplayInteraction: GameplayInteracting {
         }
     }
     
-    func update(progress: CGFloat) {
-        progressAnimator.animateProgress(percentage: progress)
+    private func renderTime() {
+        let seconds: Int = currendSeconds % 60
+        let minutes: Int = (currendSeconds / 60) % 60
+        let timeString =  String(format: Constants.timeFormat, minutes, seconds)
+        
+        gameplayRenderer.render(gameplayTimeRenderable: .init(timeString: timeString))
     }
     
+    private func invalidateTimer() {
+        gameTimer?.invalidate()
+        gameTimer = nil
+    }
+}
+
+extension GameplayInteraction {
     func didStart(game: Game) {
         cardCollectionMediator.update(with: game)
+        gameTimer = timer.scheduledTimer(withTimeInterval: Constants.timerTimeInverval, repeats: true, block: { [weak self] _ in
+            self?.currendSeconds += 1
+            self?.renderTime()
+        })
     }
     
     func didMatch(card: CardType, with progress: CGFloat) {
@@ -83,7 +103,12 @@ final class GameplayInteraction: GameplayInteracting {
         
         if progress == Constants.completeProgress {
             gameplayRenderer.render(gameplayRenderable: .init(isConfettiHidden: false))
+           invalidateTimer()
         }
+    }
+    
+    func didNotMatch() {
+        progressAnimator.animateDidNotMatch()
     }
     
     func selectCard(at index: Int) {
@@ -102,9 +127,9 @@ struct GameplayInteractionAssembler {
     ) -> GameplayInteracting {
         return GameplayInteraction(
             gameType: gameType,
-            gameBuilder: GameBuilder(cardsProvider: CardsProvider(cardType: CardType.self)),
             navigation: navigation,
-            gameController: GameController(gameBuilder: GameBuilder(cardsProvider: CardsProvider(cardType: CardType.self)))
+            gameController: GameControllerAssembler().assemble(),
+            timer: Timer.self
         )
     }
 }

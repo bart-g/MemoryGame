@@ -7,12 +7,17 @@
 
 import UIKit
 
+struct GameplayTimeRenderable {
+    let timeString: String
+}
+
 struct GameplayRenderable {
     let isConfettiHidden: Bool
 }
 
 protocol GameplayRendering: AnyObject {
     func render(gameplayRenderable: GameplayRenderable)
+    func render(gameplayTimeRenderable: GameplayTimeRenderable)
 }
 
 final class GameplayViewController: UIViewController, GameplayRendering {
@@ -26,6 +31,7 @@ final class GameplayViewController: UIViewController, GameplayRendering {
     @IBOutlet private weak var progressView: UIView!
     @IBOutlet private weak var progressViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet private weak var progressBackgroundView: UIView!
+    @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private let interaction: GameplayInteracting
@@ -107,6 +113,10 @@ final class GameplayViewController: UIViewController, GameplayRendering {
 extension GameplayViewController {
     func render(gameplayRenderable: GameplayRenderable) {
         confettiLayer.isHidden = gameplayRenderable.isConfettiHidden
+    }
+    
+    func render(gameplayTimeRenderable: GameplayTimeRenderable) {
+        timeLabel.text = gameplayTimeRenderable.timeString
     }
 }
  

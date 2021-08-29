@@ -9,7 +9,6 @@ import UIKit
 
 protocol CardCollectionActionHandling: AnyObject {
     func handle(action: CardCollectionItemAction)
-    func update(progress: CGFloat)
 }
 
 enum CardCollectionItem {

@@ -25,3 +25,10 @@ final class CardsProvider: CardsProviding {
         return  Set(cardType.allCases.shuffled())
     }
 }
+
+struct CardsProviderAssembler {
+    func assemble() -> CardsProviding {
+        return CardsProvider(cardType: CardType.self)
+    }
+}
+
