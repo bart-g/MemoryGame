@@ -60,10 +60,10 @@ final class GameplayViewController: UIViewController, GameplayRendering {
         super.viewDidLoad()
         
         setUp()
-        progressAnimator.use(backgroundView: progressBackgroundView)
-        progressAnimator.use(progressWidthConstraint: progressViewWidthConstraint)
         collectionMediator.use(collectionView: collectionView)
         collectionMediator.use(actionHandler: interaction)
+        progressAnimator.use(backgroundView: progressBackgroundView)
+        progressAnimator.use(progressWidthConstraint: progressViewWidthConstraint)
         interaction.use(cardCollectionMediator: collectionMediator)
         interaction.use(progressAnimator: progressAnimator)
         interaction.use(gameplayRenderer: self)

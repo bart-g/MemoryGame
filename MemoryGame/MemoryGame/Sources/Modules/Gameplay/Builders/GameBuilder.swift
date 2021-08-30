@@ -36,7 +36,11 @@ final class GameBuilder: GameBuilding {
         cardsForGame += cardsForGame
         cardsForGame.shuffle()
         
-        return .init(gameType: gameType, cards: cardsForGame, uniqueCardCount: numberOfCardsForGame)
+        return .init(
+            gameType: gameType,
+            cards: cardsForGame,
+            uniqueCardCount: numberOfCardsForGame
+        )
     }
 }
 

@@ -30,6 +30,7 @@ final class GameplayInteraction: GameplayInteracting {
     private let navigation: GameplayNavigating
     private let gameController: GameControlling
     private let timer: Timer.Type
+    
     private var gameTimer: Timer?
     private var currendSeconds: Int = 0
     

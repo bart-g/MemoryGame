@@ -8,6 +8,7 @@
 import UIKit
 
 final class ConfettiLayer: CAEmitterLayer {
+    
     private enum Constants {
         static let images = [#imageLiteral(resourceName: "Star")]
         static let emitterShape: CAEmitterLayerEmitterShape = CAEmitterLayerEmitterShape.line

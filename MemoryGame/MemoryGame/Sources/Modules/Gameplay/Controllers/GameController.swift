@@ -36,7 +36,7 @@ final class GameController: GameControlling {
     private var matchedCards: [CardType] = []
     private var game: Game!
     private var timer: TimerProtocol.Type
-    private var unmatchedCardsTimer: Timer?
+    private var notMatchedCardsTimer: Timer?
 
     init(
         gameBuilder: GameBuilding,
@@ -57,7 +57,7 @@ final class GameController: GameControlling {
     }
     
     func didSelect(card: CardType, at index: Int) {
-        guard unmatchedCardsTimer == nil else { return }
+        guard notMatchedCardsTimer == nil else { return }
         guard matchedCards.contains(card) == false else { return }
         guard lastSelectedCard?.index != index else { return }
         
@@ -67,7 +67,7 @@ final class GameController: GameControlling {
             if card == lastSelectedCard.card {
                 handleMatched(card: card)
             } else {
-                unmatchedCardsTimer = timer.scheduledTimer(withTimeInterval: Constants.timerDuration, repeats: false, block: { [weak self] _ in
+                notMatchedCardsTimer = timer.scheduledTimer(withTimeInterval: Constants.timerDuration, repeats: false, block: { [weak self] _ in
                     self?.handleNotMatchedCards(lastIndex: lastSelectedCard.index, currentIndex: index)
                 })
             }
@@ -81,21 +81,25 @@ final class GameController: GameControlling {
     
     private func handleMatched(card: CardType) {
         matchedCards.append(card)
-        delegate?.didMatch(card: card, with: CGFloat(matchedCards.count) / CGFloat(game.uniqueCardCount))
+        delegate?.didMatch(
+            card: card,
+            with: CGFloat(matchedCards.count) / CGFloat(game.uniqueCardCount)
+        )
         lastSelectedCard = nil
     }
     
     private func handleNotMatchedCards(lastIndex: Int, currentIndex: Int) {
-        delegate?.deselect(at: lastIndex)
-        delegate?.deselect(at: currentIndex)
+        [lastIndex, currentIndex].forEach { index in
+            delegate?.deselect(at: index)
+        }
         delegate?.didNotMatch()
         lastSelectedCard = nil
         invalidateTimer()
     }
     
     private func invalidateTimer() {
-        unmatchedCardsTimer?.invalidate()
-        unmatchedCardsTimer = nil
+        notMatchedCardsTimer?.invalidate()
+        notMatchedCardsTimer = nil
     }
 }
 
@@ -108,8 +112,3 @@ struct GameControllerAssembler {
     }
 }
 
-protocol TimerProtocol {
-    static func scheduledTimer(withTimeInterval interval: TimeInterval, repeats: Bool, block: @escaping (Timer) -> Void) -> Timer
-}
-
-extension Timer: TimerProtocol {}

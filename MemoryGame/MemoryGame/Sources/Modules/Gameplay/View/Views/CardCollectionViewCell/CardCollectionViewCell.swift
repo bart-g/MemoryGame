@@ -12,6 +12,11 @@ struct CardRenderable {
 }
 
 final class CardCollectionViewCell: UICollectionViewCell {
+    
+    private enum Constants {
+        static let animationDuration: TimeInterval = 0.3
+        static let animationOptions: UIView.AnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
+    }
 
     @IBOutlet private weak var backImageView: UIImageView!
     @IBOutlet private weak var frontImageView: UIImageView!
@@ -25,21 +30,25 @@ final class CardCollectionViewCell: UICollectionViewCell {
     }
     
     func renderFront() {
-        UIView.transition(
+        animate(
             from: backImageView,
-            to: frontImageView,
-            duration: 0.3,
-            options: [.transitionFlipFromRight, .showHideTransitionViews],
-            completion: nil
+            to: frontImageView
         )
     }
 
     func renderBack() {
-        UIView.transition(
+        animate(
             from: frontImageView,
-            to: backImageView,
-            duration: 0.3,
-            options: [.transitionFlipFromRight, .showHideTransitionViews],
+            to: backImageView
+        )
+    }
+    
+    private func animate(from fromView: UIView, to toView: UIView) {
+        UIView.transition(
+            from: fromView,
+            to: toView,
+            duration: Constants.animationDuration,
+            options: Constants.animationOptions,
             completion: nil
         )
     }
