@@ -46,8 +46,8 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
     private let gameType: GameType.Type
     private var game: Game!
     private var cards: [CardCollectionElement] = []
-    private var currentlySelectedCards: [(IndexPath, CardType)] = []
-    private var matchedCards: [CardType] = []
+    private var currentlySelectedCards: [(IndexPath, CardType)] = [] // do wywalenia
+    private var matchedCards: [CardType] = [] // do wywalenia
     private var isTimerOn = false
     
     init(

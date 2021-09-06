@@ -217,13 +217,13 @@
 			path = MemoryGameUITests;
 			sourceTree = "<group>";
 		};
-		7A4B6D4426D7DC1C007408B7 /* Modules */ = {
+		7A4B6D4426D7DC1C007408B7 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				7A4B6D5626D7EC27007408B7 /* Gameplay */,
 				7A4B6D4526D7DC2B007408B7 /* Lobby */,
 			);
-			path = Modules;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		7A4B6D4526D7DC2B007408B7 /* Lobby */ = {
@@ -251,7 +251,7 @@
 			children = (
 				7A4B6D1026D7DB92007408B7 /* AppDelegate.swift */,
 				7A1DED0C26DBFFB000A24790 /* Common */,
-				7A4B6D4426D7DC1C007408B7 /* Modules */,
+				7A4B6D4426D7DC1C007408B7 /* Screens */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
