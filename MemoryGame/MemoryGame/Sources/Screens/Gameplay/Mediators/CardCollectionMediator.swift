@@ -24,10 +24,13 @@ struct CardCollectionElement {
     let action: CardCollectionItemAction
 }
 
-protocol CardCollectionMediating: AnyObject {
+protocol CardCollectionUpdating: AnyObject {
+    func update(with game: Game)
+}
+
+protocol CardCollectionMediating: CardCollectionUpdating {
     func use(collectionView: UICollectionView)
     func use(actionHandler: CardCollectionActionHandling)
-    func update(with game: Game)
     func presentCard(at index: Int)
     func hideCard(at index: Int)
 }
@@ -44,18 +47,19 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
         
     private let screen: UIScreen
     private let gameType: GameType.Type
+    private let dataSource: CardCollectionDataSourceProtocol
+   
     private var game: Game!
-    private var cards: [CardCollectionElement] = []
-    private var currentlySelectedCards: [(IndexPath, CardType)] = [] // do wywalenia
-    private var matchedCards: [CardType] = [] // do wywalenia
     private var isTimerOn = false
     
     init(
         screen: UIScreen,
-        gameType: GameType.Type
+        gameType: GameType.Type,
+        dataSource: CardCollectionDataSourceProtocol
     ) {
         self.screen = screen
         self.gameType = gameType
+        self.dataSource = dataSource
     }
     
     func use(collectionView: UICollectionView) {
@@ -71,13 +75,7 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
     
     func update(with game: Game) {
         self.game = game
-        self.cards = game.cards.enumerated().map { index, card in
-            .init(
-                item: .card(.init(frontImage: getFrongImage(for: card))),
-                action: .presentCard(card, index)
-            )
-        }
-        
+        dataSource.update(with: game)
         setCollectionViewInsets()
         collectionView.reloadData()
     }
@@ -90,31 +88,6 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
     func hideCard(at index: Int) {
         guard let cell = collectionView.cellForItem(at:  IndexPath(item: index, section: 0)) as? CardCollectionViewCell else { return }
         cell.renderBack()
-    }
-    
-    private func getFrongImage(for cardType: CardType) -> UIImage {
-        switch cardType {
-        case .bat:
-            return #imageLiteral(resourceName: "Bat")
-        case .cat:
-            return #imageLiteral(resourceName: "Cat")
-        case .cow:
-            return #imageLiteral(resourceName: "Cow")
-        case .dragon:
-            return #imageLiteral(resourceName: "Dragon")
-        case .garbage:
-            return #imageLiteral(resourceName: "GarbageMan")
-        case .ghost:
-            return #imageLiteral(resourceName: "GhostDog")
-        case .hen:
-            return #imageLiteral(resourceName: "Hen")
-        case .horse:
-            return #imageLiteral(resourceName: "Horse")
-        case .pig:
-            return #imageLiteral(resourceName: "Pig")
-        case .spider:
-            return #imageLiteral(resourceName: "Spider")
-        }
     }
     
     private func getMaxCardColumnsCount() -> Int {
@@ -132,11 +105,11 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
 
 extension CardCollectionMediator {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        cards.count
+        dataSource.numberOfItemsInSection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = cards[indexPath.row].item
+        let item = dataSource.getItem(at: indexPath)
         
         switch item {
         case .card(let renderable):
@@ -148,7 +121,8 @@ extension CardCollectionMediator {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        actionHandler.handle(action: cards[indexPath.row].action)
+        let action = dataSource.getAction(at: indexPath)
+        actionHandler.handle(action: action)
         collectionView.deselectItem(at: indexPath, animated: false)
     }
     
@@ -164,7 +138,8 @@ struct CardCollectionMediatorAssembler {
     func assemble() -> CardCollectionMediating {
         return CardCollectionMediator(
             screen: UIScreen.main,
-            gameType: GameType.self
+            gameType: GameType.self,
+            dataSource: CardCollectionDataSourceAssembler().assemble()
         )
     }
 }

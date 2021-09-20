@@ -14,11 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        setUpRootViewController()
+        
+        return true
+    }
+    
+    private func setUpRootViewController() {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = LobbyViewControllerAssembler().assemble()
         window?.makeKeyAndVisible()
-        
-        return true
     }
 }
 

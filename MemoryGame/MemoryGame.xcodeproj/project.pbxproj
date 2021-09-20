@@ -18,6 +18,8 @@
 		7A1DED0626DBFE4E00A24790 /* TimerProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DED0526DBFE4E00A24790 /* TimerProtocolMock.swift */; };
 		7A1DED0826DBFE7100A24790 /* GameControllerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DED0726DBFE7100A24790 /* GameControllerDelegateMock.swift */; };
 		7A1DED0B26DBFFAE00A24790 /* TimerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1DED0A26DBFFAE00A24790 /* TimerProtocol.swift */; };
+		7A32B1FB26F8DC12005EC4E3 /* CardCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32B1FA26F8DC12005EC4E3 /* CardCollectionDataSource.swift */; };
+		7A32B1FE26F8DCC5005EC4E3 /* CardFrontImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32B1FD26F8DCC5005EC4E3 /* CardFrontImageProvider.swift */; };
 		7A4B6D1126D7DB92007408B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B6D1026D7DB92007408B7 /* AppDelegate.swift */; };
 		7A4B6D1A26D7DB93007408B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4B6D1926D7DB93007408B7 /* Assets.xcassets */; };
 		7A4B6D1D26D7DB93007408B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4B6D1B26D7DB93007408B7 /* LaunchScreen.storyboard */; };
@@ -66,6 +68,8 @@
 		7A1DED0526DBFE4E00A24790 /* TimerProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProtocolMock.swift; sourceTree = "<group>"; };
 		7A1DED0726DBFE7100A24790 /* GameControllerDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControllerDelegateMock.swift; sourceTree = "<group>"; };
 		7A1DED0A26DBFFAE00A24790 /* TimerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerProtocol.swift; sourceTree = "<group>"; };
+		7A32B1FA26F8DC12005EC4E3 /* CardCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionDataSource.swift; sourceTree = "<group>"; };
+		7A32B1FD26F8DCC5005EC4E3 /* CardFrontImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardFrontImageProvider.swift; sourceTree = "<group>"; };
 		7A4B6D0D26D7DB92007408B7 /* MemoryGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoryGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4B6D1026D7DB92007408B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A4B6D1926D7DB93007408B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,6 +170,14 @@
 				7A1DED0A26DBFFAE00A24790 /* TimerProtocol.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		7A32B1FC26F8DC15005EC4E3 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				7A32B1FA26F8DC12005EC4E3 /* CardCollectionDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		7A4B6D0426D7DB91007408B7 = {
@@ -294,6 +306,7 @@
 			children = (
 				7A1DECFE26DAB6B400A24790 /* Animators */,
 				7A4B6D6326D7FEDF007408B7 /* Builders */,
+				7A32B1FC26F8DC15005EC4E3 /* DataSource */,
 				7A1DECF926DAB20500A24790 /* Controllers */,
 				7A4B6D5A26D7F3C0007408B7 /* Interaction */,
 				7A4B6D6926D80CDB007408B7 /* Mediators */,
@@ -352,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				7A4B6D6426D7FEED007408B7 /* CardsProvider.swift */,
+				7A32B1FD26F8DCC5005EC4E3 /* CardFrontImageProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -497,6 +511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A4B6D4D26D7E92E007408B7 /* LobbyNavigation.swift in Sources */,
+				7A32B1FB26F8DC12005EC4E3 /* CardCollectionDataSource.swift in Sources */,
 				7A1DECFD26DAB6A000A24790 /* ProgressAnimator.swift in Sources */,
 				7A1DECFB26DAB24500A24790 /* Game.swift in Sources */,
 				7A4B6D4A26D7E8B2007408B7 /* LobbyInteraction.swift in Sources */,
@@ -511,6 +526,7 @@
 				7A4B6D6226D7FECD007408B7 /* GameBuilder.swift in Sources */,
 				7A4B6D5026D7EBC8007408B7 /* GameType.swift in Sources */,
 				7A4B6D5926D7F3BC007408B7 /* GameplayInteraction.swift in Sources */,
+				7A32B1FE26F8DCC5005EC4E3 /* CardFrontImageProvider.swift in Sources */,
 				7A4B6D1126D7DB92007408B7 /* AppDelegate.swift in Sources */,
 				7A4B6D5F26D7FEB1007408B7 /* CardType.swift in Sources */,
 				7A1DECF826DAB1E000A24790 /* GameController.swift in Sources */,

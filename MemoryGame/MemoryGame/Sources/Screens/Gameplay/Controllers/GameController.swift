@@ -57,9 +57,13 @@ final class GameController: GameControlling {
     }
     
     func didSelect(card: CardType, at index: Int) {
-        guard notMatchedCardsTimer == nil else { return }
-        guard matchedCards.contains(card) == false else { return }
-        guard lastSelectedCard?.index != index else { return }
+        let isTimerNotRunning = notMatchedCardsTimer == nil
+        let isCardNotMatched = matchedCards.contains(card) == false
+        let isCardNotSelected = lastSelectedCard?.index != index
+        
+        guard isTimerNotRunning else { return }
+        guard isCardNotMatched else { return }
+        guard isCardNotSelected else { return }
         
         if let lastSelectedCard = lastSelectedCard {
             delegate?.selectCard(at: index)
