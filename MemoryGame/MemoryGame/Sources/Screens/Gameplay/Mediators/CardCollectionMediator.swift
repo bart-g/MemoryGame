@@ -66,7 +66,13 @@ final class CardCollectionMediator: NSObject, CardCollectionMediating, UICollect
         self.collectionView = collectionView
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UINib(nibName: Constants.cellIdentifier, bundle: Bundle.main), forCellWithReuseIdentifier: Constants.cellIdentifier)
+        collectionView.register(
+            UINib(
+                nibName: Constants.cellIdentifier,
+                bundle: Bundle.main
+            ),
+            forCellWithReuseIdentifier: Constants.cellIdentifier
+        )
     }
     
     func use(actionHandler: CardCollectionActionHandling) {

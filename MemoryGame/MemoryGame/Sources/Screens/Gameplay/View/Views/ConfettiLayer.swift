@@ -11,6 +11,7 @@ final class ConfettiLayer: CAEmitterLayer {
     
     private enum Constants {
         static let images = [#imageLiteral(resourceName: "Star")]
+        static let colors = [#colorLiteral(red: 1, green: 0.9450980392, blue: 0.4, alpha: 1), #colorLiteral(red: 0.9568627451, green: 0.7529411765, blue: 0.1843137255, alpha: 1), #colorLiteral(red: 0.9529411765, green: 0.4784313725, blue: 0.4705882353, alpha: 1), #colorLiteral(red: 0.3682531118, green: 0.8135145307, blue: 0.9476092458, alpha: 1)]
         static let emitterShape: CAEmitterLayerEmitterShape = CAEmitterLayerEmitterShape.line
         static let cellsRange: ClosedRange<Int> = (0...10)
         static let birthRate: Float = 1.0
@@ -46,7 +47,7 @@ final class ConfettiLayer: CAEmitterLayer {
     private func generateEmitterCells(range: ClosedRange<Int>) -> [CAEmitterCell] {
         return range.map { _ -> CAEmitterCell in
             let cell = CAEmitterCell()
-            cell.color = [#colorLiteral(red: 1, green: 0.9450980392, blue: 0.4, alpha: 1), #colorLiteral(red: 0.9568627451, green: 0.7529411765, blue: 0.1843137255, alpha: 1), #colorLiteral(red: 0.9529411765, green: 0.4784313725, blue: 0.4705882353, alpha: 1), #colorLiteral(red: 0.3682531118, green: 0.8135145307, blue: 0.9476092458, alpha: 1)].randomElement()!.cgColor
+            cell.color = Constants.colors.randomElement()!.cgColor
             cell.contents = Constants.images.randomElement()!.cgImage
             cell.birthRate = Constants.birthRate
             cell.lifetime = Constants.lifetime

@@ -93,19 +93,23 @@ final class GameplayInteraction: GameplayInteracting {
 extension GameplayInteraction {
     func didStart(game: Game) {
         cardCollectionMediator.update(with: game)
-        gameTimer = timer.scheduledTimer(withTimeInterval: Constants.timerTimeInverval, repeats: true, block: { [weak self] _ in
-            self?.currendSeconds += 1
-            self?.renderTime()
-        })
+        gameTimer = timer.scheduledTimer(
+            withTimeInterval: Constants.timerTimeInverval,
+            repeats: true,
+            block: { [weak self] _ in
+                self?.currendSeconds += 1
+                self?.renderTime()
+            }
+        )
     }
     
     func didMatch(card: CardType, with progress: CGFloat) {
         progressAnimator.animateProgress(percentage: progress)
         
-        if progress == Constants.completeProgress {
-            gameplayRenderer.render(gameplayRenderable: .init(isConfettiHidden: false))
-           invalidateTimer()
-        }
+        guard progress == Constants.completeProgress else { return }
+          
+        gameplayRenderer.render(gameplayRenderable: .init(isConfettiHidden: false))
+        invalidateTimer()
     }
     
     func didNotMatch() {

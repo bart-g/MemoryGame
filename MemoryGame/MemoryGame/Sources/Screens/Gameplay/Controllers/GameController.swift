@@ -61,19 +61,25 @@ final class GameController: GameControlling {
         let isCardNotMatched = matchedCards.contains(card) == false
         let isCardNotSelected = lastSelectedCard?.index != index
         
-        guard isTimerNotRunning else { return }
-        guard isCardNotMatched else { return }
-        guard isCardNotSelected else { return }
-        
+        guard
+            isTimerNotRunning,
+            isCardNotMatched,
+            isCardNotSelected
+        else { return }
+      
         if let lastSelectedCard = lastSelectedCard {
             delegate?.selectCard(at: index)
             
             if card == lastSelectedCard.card {
                 handleMatched(card: card)
             } else {
-                notMatchedCardsTimer = timer.scheduledTimer(withTimeInterval: Constants.timerDuration, repeats: false, block: { [weak self] _ in
-                    self?.handleNotMatchedCards(lastIndex: lastSelectedCard.index, currentIndex: index)
-                })
+                notMatchedCardsTimer = timer.scheduledTimer(
+                    withTimeInterval: Constants.timerDuration,
+                    repeats: false,
+                    block: { [weak self] _ in
+                        self?.handleNotMatchedCards(lastIndex: lastSelectedCard.index, currentIndex: index)
+                    }
+                )
             }
             
             return
